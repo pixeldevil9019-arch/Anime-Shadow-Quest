@@ -166,8 +166,9 @@ public sealed class GameBootstrap : MonoBehaviour
         HeroVitals vitals=FindFirstObjectByType<HeroVitals>();
         if(vitals) GUI.Label(new Rect(28,93,270,22),"HP "+vitals.Health+" / "+vitals.maxHealth);
         GUI.Label(new Rect(28,119,280,22),"WAVE "+Wave+"  •  "+Chapter);
-        if(GUI.Button(new Rect(18,Screen.height-100,100,64),"◀ MOVE")) AnimePlayerController.TouchMove=-1;
-        if(GUI.Button(new Rect(124,Screen.height-100,100,64),"MOVE ▶")) AnimePlayerController.TouchMove=1;
+        bool moveLeft=GUI.RepeatButton(new Rect(18,Screen.height-100,100,64),"◀ MOVE");
+        bool moveRight=GUI.RepeatButton(new Rect(124,Screen.height-100,100,64),"MOVE ▶");
+        if(Event.current.type==EventType.Repaint) AnimePlayerController.TouchMove=moveLeft&&!moveRight?-1:moveRight&&!moveLeft?1:0;
         if(GUI.Button(new Rect(Screen.width-226,Screen.height-100,96,64),"JUMP")) AnimePlayerController.TouchJump=true;
         if(GUI.Button(new Rect(Screen.width-122,Screen.height-100,104,64),"ATTACK")) AnimePlayerController.TouchAttack=true;
         if(GUI.Button(new Rect(Screen.width-122,Screen.height-174,104,58),"DODGE")) AnimePlayerController.TouchDodge=true;
