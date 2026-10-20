@@ -47,7 +47,7 @@ public sealed class GameBootstrap : MonoBehaviour
     private GameObject Primitive(PrimitiveType type, string name, Vector3 pos, Vector3 scale, Material mat, Transform parent=null)
     {
         var g=GameObject.CreatePrimitive(type); g.name=name; g.transform.position=pos; g.transform.localScale=scale;
-        if(parent) g.transform.SetParent(parent,true);
+        if(parent) { g.transform.SetParent(parent,true); if(parent.name=="Stylized Hero") { var collider=g.GetComponent<Collider>(); if(collider) collider.enabled=false; } }
         var r=g.GetComponent<Renderer>(); if(r) r.sharedMaterial=mat;
         return g;
     }
@@ -85,7 +85,7 @@ public sealed class GameBootstrap : MonoBehaviour
         Primitive(PrimitiveType.Sphere,"Head",new Vector3(0,.83f,.03f),new Vector3(.56f,.56f,.52f),new Material(dark),visuals.transform);
         Primitive(PrimitiveType.Cube,"Scarf",new Vector3(0,.42f,.25f),new Vector3(.78f,.16f,.22f),pink,visuals.transform);
         Primitive(PrimitiveType.Cube,"Energy Blade",new Vector3(.58f,.1f,.18f),new Vector3(.12f,1.05f,.13f),gold,visuals.transform);
-        player.AddComponent<AnimePlayerController>();
+        player.AddComponent<HeroVitals>();\n        player.AddComponent<AnimePlayerController>();
         var camObj=new GameObject("Main Camera"); camObj.tag="MainCamera";
         var cam=camObj.AddComponent<Camera>(); cam.fieldOfView=62; cam.nearClipPlane=.1f; cam.farClipPlane=180;
         if(!camObj.GetComponent<AudioListener>()) camObj.AddComponent<AudioListener>();
