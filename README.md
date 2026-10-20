@@ -2,14 +2,14 @@
 
 An original anime-inspired third-person action RPG prototype built with Unity. The project emphasizes a playable foundation: a procedural 3D world, third-person movement, mobile touch controls, melee combat, enemy waves, quests, progression, and an Android build workflow.
 
-> **Honest status:** this repository is a playable-code foundation, not a finished commercial-length game. No one can guarantee a bug-free game without building and testing on the target Unity version and Android devices. The CI workflow needs valid Unity licensing secrets before it can build an APK.
+> **Honest status:** this repository is a playable-code foundation, not a finished commercial-length game. No one can guarantee a bug-free game without building and testing on the target Unity version and Android devices. This starter currently has a compact repeatable wave loop rather than a finished long story campaign. The CI workflow needs valid Unity licensing secrets before it can build an APK.
 
 ## Gameplay foundation
 
 - Runtime-generated 3D training valley with terrain, paths, rocks, trees, gates, lanterns, and a shrine.
 - Third-person character movement, jump, sprint, dodge, camera orbit, and mobile controls.
 - Lock-free melee combat with cooldown, hit range, enemy health, damage feedback, and defeat effects.
-- Multiple enemy waves, quest objectives, XP, levels, coins, health, and saved progress.
+- Enemy waves, XP, levels, coins, and a health/damage loop. (Persistent save slots and a full authored quest campaign are future work.)
 - HUD, quest status, touch buttons, and keyboard controls for editor testing.
 - No paid assets or external art packs required to run the prototype; placeholder characters are procedural primitives and should be replaced with a rigged anime character and animations for production quality.
 
@@ -17,7 +17,7 @@ An original anime-inspired third-person action RPG prototype built with Unity. T
 
 1. Install Unity Hub and a Unity 6 editor with **Android Build Support**, Android SDK & NDK Tools, and OpenJDK.
 2. Clone or download this repository and open its root folder in Unity Hub.
-3. Open `Assets/Scenes/Main.unity` if it exists, or create a scene and add an empty GameObject named `GameBootstrap`, then attach `Assets/Scripts/GameBootstrap.cs`. Save the scene as `Assets/Scenes/Main.unity`.
+3. Open the project and allow the Editor setup script to create/register `Assets/Scenes/Main.unity`. If needed, use **Anime Shadow Quest → Repair Build Scene**. The runtime bootstrap generates the world and gameplay objects.
 4. In **File → Build Profiles**, select Android, switch platform, set package identifier to `com.pixeldevil.animeshadowquest`, and set orientation to Landscape.
 5. Press Play in the Editor. WASD/arrow keys move, Space jumps, Shift sprints, J attacks, K dodges, and mouse movement orbits the camera. On a touchscreen, use the left movement pad and right action buttons.
 
