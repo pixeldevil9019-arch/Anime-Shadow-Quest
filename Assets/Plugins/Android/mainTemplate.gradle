@@ -1,0 +1,41 @@
+// Unity Android application module template. Unity replaces the **TOKENS** during export.
+apply plugin: 'com.android.application'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    **DEPS**
+}
+
+android {
+    namespace "**NAMESPACE**"
+    compileSdk **APIVERSION**
+    buildToolsVersion "**BUILDTOOLS**"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        applicationId '**APPLICATIONID**'
+        minSdk **MINSDKVERSION**
+        targetSdk **TARGETSDKVERSION**
+        versionCode **VERSIONCODE**
+        versionName '**VERSIONNAME**'
+        ndk { abiFilters **ABIFILTERS** }
+        consumerProguardFiles 'proguard-unity.txt' **USER_PROGUARD**
+    }
+
+    lint { abortOnError false }
+
+    aaptOptions {
+        noCompress = **BUILTIN_NOCOMPRESS** + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    **SIGN**
+    **PACKAGING**
+    **IL_CPP_BUILD_SETUP**
+    **SOURCE_BUILD_SETUP**
+    **EXTERNAL_SOURCES**
+}
