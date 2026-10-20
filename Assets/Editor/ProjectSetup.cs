@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using System.IO;
 
-/// <summary>Creates a minimal build scene and registers it in Build Settings.</summary>
+/// <summary>Creates a build scene and applies Android settings before CI builds the APK.</summary>
 [InitializeOnLoad]
 public static class ProjectSetup
 {
@@ -24,8 +24,16 @@ public static class ProjectSetup
         bool found=false;
         foreach(var s in scenes)if(s.path==path){found=true;break;}
         if(!found){scenes.Add(new EditorBuildSettingsScene(path,true));EditorBuildSettings.scenes=scenes.ToArray();}
+
+        PlayerSettings.productName="Anime Shadow Quest";
+        PlayerSettings.companyName="Moonbound Studio";
+        PlayerSettings.defaultInterfaceOrientation=UIOrientation.LandscapeLeft;
+        PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android,"com.pixeldevil.animeshadowquest");
+        PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android,ScriptingImplementation.IL2CPP);
+        PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
+        PlayerSettings.Android.minSdkVersion=AndroidSdkVersions.AndroidApiLevel24;
         AssetDatabase.Refresh();
-        Debug.Log("Anime Shadow Quest: Main scene registered for builds.");
+        Debug.Log("Anime Shadow Quest: build scene and Android player settings are ready.");
     }
 }
 #endif
