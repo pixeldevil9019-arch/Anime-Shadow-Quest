@@ -6,7 +6,6 @@ public sealed class ThirdPersonCamera : MonoBehaviour
     public Vector3 offset=new Vector3(0,4.2f,-6.5f);
     public float smoothSpeed=8f, sensitivity=2.2f;
     private Vector2 lastPointer;
-    private bool wasTouching;
     private void LateUpdate()
     {
         if(!target)return;
@@ -27,7 +26,6 @@ public sealed class ThirdPersonCamera : MonoBehaviour
                 lastPointer=touch.position;
             }
         }
-        wasTouching=touchOnRight;
         Quaternion rotation=Quaternion.Euler(pitch,yaw,0);
         Vector3 desired=target.position+rotation*offset;
         transform.position=Vector3.Lerp(transform.position,desired,1-Mathf.Exp(-smoothSpeed*Time.deltaTime));
