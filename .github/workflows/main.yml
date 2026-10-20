@@ -1,4 +1,4 @@
-wname: Unity Android APK
+name: Unity Android APK
 
 on:
   workflow_dispatch:
