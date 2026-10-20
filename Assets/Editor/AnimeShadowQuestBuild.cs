@@ -18,6 +18,7 @@ public static class AnimeShadowQuestBuild
 
         const string outputPath="build/Android/AnimeShadowQuest.apk";
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+        EditorUserBuildSettings.buildAppBundle=false;
         var options=new BuildPlayerOptions
         {
             scenes=scenes,
