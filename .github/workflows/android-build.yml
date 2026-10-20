@@ -43,6 +43,7 @@ jobs:
           unityVersion: 6000.0.32f1
           buildsPath: build
           buildName: AnimeShadowQuest
+          buildMethod: AnimeShadowQuestBuild.PerformBuild
           androidAppBundle: false
           allowDirtyBuild: true
 
