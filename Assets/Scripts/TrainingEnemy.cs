@@ -32,9 +32,9 @@ public sealed class TrainingEnemy : MonoBehaviour
     public void TakeHit()
     {
         if(GameBootstrap.IsGameOver||health<=0)return;
-        health--;staggerTimer=isBoss?.3f:.18f;flashTimer=.13f;
+        health--;staggerTimer=isBoss ? .3f : .18f;flashTimer=.13f;
         if(cachedRenderer)cachedRenderer.material.color=Color.white;
-        transform.localScale*=isBoss?.97f:.92f;
+        transform.localScale*=isBoss ? .97f : .92f;
         if(health<=0)
         {
             GameBootstrap.AddScore(isBoss?1000:100);GameBootstrap.EnemyDefeated();Destroy(gameObject);
