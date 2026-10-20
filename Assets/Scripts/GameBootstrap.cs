@@ -114,7 +114,7 @@ public sealed class GameBootstrap : MonoBehaviour
     }
     private void SpawnWave(int wave)
     {
-        Wave=wave;
+        Wave=wave; SaveProgress();
         Chapter=wave<4?"CHAPTER I — THE AWAKENING":wave<8?"CHAPTER II — THE FORGOTTEN GARDEN":wave<12?"CHAPTER III — THE SHATTERED MOON":"CHAPTER IV — THE ETERNAL NIGHT";
         int count=Mathf.Min(2+wave,12);
         bool boss=wave%5==0;
@@ -132,9 +132,20 @@ public sealed class GameBootstrap : MonoBehaviour
     {
         Score+=value; Coins+=Mathf.Max(1,value/10); XP+=Mathf.Max(1,value/2);
         while(XP>=PlayerLevel*100){XP-=PlayerLevel*100;PlayerLevel++;}
+        SaveProgress();
     }
-    public static void EnemyDefeated(){EnemiesDefeated++;}
-    public static void EndGame(){IsGameOver=true;}
+    public static void EnemyDefeated(){EnemiesDefeated++;SaveProgress();}
+    public static void EndGame(){IsGameOver=true;SaveProgress();}
+    public static void SaveProgress()
+    {
+        PlayerPrefs.SetInt("ASQ.Score",Score);
+        PlayerPrefs.SetInt("ASQ.Defeated",EnemiesDefeated);
+        PlayerPrefs.SetInt("ASQ.Level",PlayerLevel);
+        PlayerPrefs.SetInt("ASQ.XP",XP);
+        PlayerPrefs.SetInt("ASQ.Coins",Coins);
+        PlayerPrefs.SetInt("ASQ.Wave",Wave);
+        PlayerPrefs.Save();
+    }
     public static void NextWave()
     {
         GameBootstrap game=FindFirstObjectByType<GameBootstrap>();
