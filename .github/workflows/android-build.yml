@@ -44,7 +44,7 @@ jobs:
           buildsPath: build
           buildName: AnimeShadowQuest
           buildMethod: AnimeShadowQuestBuild.PerformBuild
-          androidAppBundle: false
+          androidExportType: androidPackage
           allowDirtyBuild: true
 
       - name: Verify APK output
