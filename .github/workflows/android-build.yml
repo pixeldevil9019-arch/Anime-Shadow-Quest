@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   build-android:
-    name: Build signed-by-Unity Android APK
+    name: Build Android APK (test build)
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
