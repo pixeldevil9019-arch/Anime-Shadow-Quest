@@ -120,8 +120,8 @@ public sealed class GameBootstrap : MonoBehaviour
         GUI.Box(new Rect(14,14,290,114),"");
         GUI.Label(new Rect(28,21,265,24),"ANIME SHADOW QUEST");
         GUI.Label(new Rect(28,48,260,22),"LV "+PlayerLevel+"   XP "+XP+"   COINS "+Coins);
-        GUI.Label(new Rect(28,73,260,22),"Score "+Score+"   Wraiths "+EnemiesDefeated);
-        GUI.Label(new Rect(28,96,260,20),"Valley Expedition");
+        GUI.Label(new Rect(28,73,260,22),"Score "+Score+"   Wraiths "+EnemiesDefeated);\n        var vitals=FindFirstObjectByType<HeroVitals>();\n        if(vitals) GUI.Label(new Rect(28,96,260,20),"HP "+vitals.Health+" / "+vitals.maxHealth);
+        
         if(GUI.Button(new Rect(18,Screen.height-100,100,64),"MOVE ◀")) AnimePlayerController.TouchMove=-1;
         if(GUI.Button(new Rect(124,Screen.height-100,100,64),"MOVE ▶")) AnimePlayerController.TouchMove=1;
         if(GUI.Button(new Rect(Screen.width-226,Screen.height-100,96,64),"JUMP")) AnimePlayerController.TouchJump=true;
