@@ -32,6 +32,9 @@ public static class ProjectSetup
         PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android,ScriptingImplementation.IL2CPP);
         PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
         PlayerSettings.Android.minSdkVersion=AndroidSdkVersions.AndroidApiLevel24;
+        PlayerSettings.Android.useCustomMainGradleTemplate=true;
+        PlayerSettings.Android.useCustomGradlePropertiesTemplate=true;
+        PlayerSettings.Android.useCustomSettingsTemplate=true;
         AssetDatabase.Refresh();
         Debug.Log("Anime Shadow Quest: build scene and Android player settings are ready.");
     }
