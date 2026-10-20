@@ -1,45 +1,60 @@
-# Anime Shadow Quest — 3D Android RPG
+# Anime Shadow Quest — 3D Android Action RPG
 
-An original anime-inspired third-person action RPG prototype built with Unity. The project emphasizes a playable foundation: a procedural 3D world, third-person movement, mobile touch controls, melee combat, enemy waves, quests, progression, and an Android build workflow.
+Anime Shadow Quest is an original anime-inspired third-person action-RPG starter for Android, built in Unity. It creates a moonlit valley at runtime so it can be tested without downloading paid assets.
 
-> **Honest status:** this repository is a playable-code foundation, not a finished commercial-length game. No one can guarantee a bug-free game without building and testing on the target Unity version and Android devices. This starter currently has a compact repeatable wave loop rather than a finished long story campaign. The CI workflow needs valid Unity licensing secrets before it can build an APK.
+> **Build status:** source and build configuration are committed, but this environment cannot run Unity or certify the APK. The first GitHub Actions build must compile the project before the APK can be called successful. This is an expanding prototype, not a finished commercial game.
 
-## Gameplay foundation
+## Gameplay included
 
-- Runtime-generated 3D training valley with terrain, paths, rocks, trees, gates, lanterns, and a shrine.
-- Third-person character movement, jump, sprint, dodge, camera orbit, and mobile controls.
-- Lock-free melee combat with cooldown, hit range, enemy health, damage feedback, and defeat effects.
-- Enemy waves, XP, levels, coins, and a health/damage loop. (Persistent save slots and a full authored quest campaign are future work.)
-- HUD, quest status, touch buttons, and keyboard controls for editor testing.
-- No paid assets or external art packs required to run the prototype; placeholder characters are procedural primitives and should be replaced with a rigged anime character and animations for production quality.
+- Runtime-generated 3D moonlit valley with a shrine, reflecting pool, ancient pillars, spirit crystals, sakura-like trees, lanterns, fog and directional moonlight.
+- Original opening story cards with cinematic letterbox bars; tap/click/key skips the intro.
+- Third-person movement, sprint, jump, dodge, melee combat and a follow camera with mouse orbit in the Editor and touch-drag orbit on Android.
+- Touchscreen movement and action controls.
+- Enemy pursuit, attack damage, hit feedback, score, XP, levels, coins, player health and local save data.
+- Four chapter labels and an escalating wave campaign. Every fifth wave introduces Moon Devourer boss enemies.
+- Android player settings configured by an Editor setup script: package ID com.pixeldevil.animeshadowquest, landscape orientation, IL2CPP and ARM64.
+- Custom Unity Android Gradle templates in Assets/Plugins/Android/.
 
-## Open in Unity
+## Open and play locally
 
-1. Install Unity Hub and a Unity 6 editor with **Android Build Support**, Android SDK & NDK Tools, and OpenJDK.
-2. Clone or download this repository and open its root folder in Unity Hub.
-3. Open the project and allow the Editor setup script to create/register `Assets/Scenes/Main.unity`. If needed, use **Anime Shadow Quest → Repair Build Scene**. The runtime bootstrap generates the world and gameplay objects.
-4. In **File → Build Profiles**, select Android, switch platform, set package identifier to `com.pixeldevil.animeshadowquest`, and set orientation to Landscape.
-5. Press Play in the Editor. WASD/arrow keys move, Space jumps, Shift sprints, J attacks, K dodges, and mouse movement orbits the camera. On a touchscreen, use the left movement pad and right action buttons.
+1. Install Unity Hub and Unity **6000.0.32f1** with Android Build Support, Android SDK & NDK Tools and OpenJDK.
+2. Clone this repository and open the repository root in Unity Hub.
+3. Allow the Editor to import packages and run the setup script. It creates/registers Assets/Scenes/Main.unity and configures Android settings. If needed, select **Anime Shadow Quest → Repair Build Scene** from the Unity menu.
+4. Press **Play**. The runtime bootstrap creates the world and gameplay objects.
 
-The runtime bootstrap creates the scene's world and gameplay objects. The art is deliberately procedural so the project can start without importing copyrighted character models.
+### Controls
 
-## Android CI workflow
+- **Keyboard:** WASD / arrow keys move, Space jumps, Shift sprints, J attacks, K dodges.
+- **Mouse:** right-click drag to orbit the camera; left click attacks.
+- **Android:** hold the left movement buttons to move, use Jump/Attack/Dodge, and drag on the right side of the screen to orbit the camera.
 
-`.github/workflows/android-build.yml` builds an APK on push or manual dispatch using GameCI. Add these repository **Actions secrets** first:
+The current hero and enemies are procedural placeholder meshes, not rigged anime models. Replacing these with properly licensed character models, animation clips, sound effects, music, and authored environment art is a major step toward a polished release.
 
-- `UNITY_LICENSE` — Unity Personal/Pro license file contents in the format expected by GameCI.
-- `UNITY_EMAIL` — Unity account email.
-- `UNITY_PASSWORD` — Unity account password (use a dedicated account and rotate if exposed).
+## Build a downloadable Android APK with GitHub Actions
 
-Then open **Actions → Android Build → Run workflow**. The first build may fail until the Unity license and Android modules are configured. Never commit credentials or license files to the repository.
+Workflow: .github/workflows/android-build.yml (**Unity Android APK**).
 
-## Roadmap for a longer game
+1. Open this repository on GitHub.
+2. Go to **Settings → Secrets and variables → Actions** and add these repository secrets:
+   - UNITY_LICENSE: the Unity license file contents supported by GameCI.
+   - UNITY_EMAIL: the Unity account email used for activation.
+   - UNITY_PASSWORD: the Unity account password.
+3. Open **Actions → Unity Android APK → Run workflow**.
+4. Wait for the **Build APK with Unity and Gradle** job to finish.
+5. Open the successful workflow run, scroll to **Artifacts**, and download **AnimeShadowQuest-Android-APK**. Extract the ZIP to get the APK.
 
-1. Replace placeholder meshes with a properly rigged anime hero, enemies, and authored animations.
-2. Add authored story scenes, dialogue, sound, music, save-slot UI, boss encounters, and a quest journal.
-3. Build and profile on real low/mid-range Android devices; test input, performance, save migration, and device aspect ratios.
-4. Add accessibility options, localization, QA automation, and release signing.
+Unity invokes its supported embedded Gradle and Android toolchain during the build; the custom Gradle templates configure that process. Installing a separate Gradle executable on GitHub's runner is not required. Never commit license files or credentials to the repository.
 
-## License
+**If the build fails:** open the workflow run and inspect the failing step's log. The most common initial causes are missing/invalid Unity licensing secrets, an unavailable Unity editor image, package import errors, or a Gradle template compatibility issue. A successful source upload is not the same as a successful APK build.
 
-The code in this repository is provided as a starter project. Add a project license before redistributing it. All placeholder geometry is generated by code; no third-party game art is bundled.
+## Current scope and next milestones
+
+This is a playable-code foundation with repeatable waves and saved progression, not yet a long authored story campaign. Recommended next development steps:
+
+1. Add rigged anime characters, real movement/combat animations, facial expressions and polished VFX.
+2. Build authored levels, NPC dialogue, branching quests, cutscenes, puzzle rooms and a quest journal.
+3. Add audio, music, accessibility options, settings and save-slot management.
+4. Test performance, controls, thermal behavior, aspect ratios and save migration on real Android devices.
+5. Add automated play-mode tests, release signing, crash reporting and a store-ready build pipeline.
+
+No bug-free claim is possible until the project is compiled and tested on target devices. All placeholder geometry is generated by code; no third-party game art is bundled.
