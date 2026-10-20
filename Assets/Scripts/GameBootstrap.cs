@@ -24,6 +24,7 @@ public sealed class GameBootstrap : MonoBehaviour
     private void Awake()
     {
         if (FindObjectsByType<GameBootstrap>(FindObjectsSortMode.None).Length > 1) { Destroy(gameObject); return; }
+        Application.targetFrameRate=60; QualitySettings.vSyncCount=0; Screen.sleepTimeout=SleepTimeout.NeverSleep;
         Score=PlayerPrefs.GetInt("ASQ.Score",0); EnemiesDefeated=PlayerPrefs.GetInt("ASQ.Defeated",0); IsGameOver=false; PlayerLevel=PlayerPrefs.GetInt("ASQ.Level",1); XP=PlayerPrefs.GetInt("ASQ.XP",0); Coins=PlayerPrefs.GetInt("ASQ.Coins",0); Wave=Mathf.Max(1,PlayerPrefs.GetInt("ASQ.Wave",1));
         worldRoot=new GameObject("Generated World").transform;
         CreateMaterials(); BuildWorld(); BuildPlayer(); BuildLighting(); SpawnWave(Wave);
